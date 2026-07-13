@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.material3.Button
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.MaterialTheme
@@ -108,7 +109,7 @@ fun UnitApp(modifier: Modifier = Modifier){
                         width = 2.dp,
                         color = Color.Black,
                         shape = MaterialTheme.shapes.medium
-                    ).padding(start = 10.dp)
+                    )
             ){
                 //1st ui element
                 Text(
@@ -135,7 +136,7 @@ fun UnitApp(modifier: Modifier = Modifier){
             //2nd element: spacer
             Spacer(modifier = Modifier.width(16.dp))
 
-            //3rd element wrapper
+            //3rd element dropdown wrapper
             Box(
                 modifier = Modifier
                     .weight(1f)
@@ -172,6 +173,7 @@ fun UnitApp(modifier: Modifier = Modifier){
 
         Spacer(modifier = Modifier.width(16.dp))
 
+        //input text
         OutlinedTextField(
             value = inputValue.value,
             onValueChange = {
@@ -181,7 +183,33 @@ fun UnitApp(modifier: Modifier = Modifier){
                 Text(text = "Enter value")
             },
             modifier = Modifier
-                .fillMaxWidth()
+                .fillMaxWidth().padding(10.dp)
         )
+
+        Spacer(modifier = Modifier.width(16.dp))
+
+        Button(
+            modifier = Modifier
+                .padding(16.dp)
+                .fillMaxWidth(),
+            onClick = {
+            var input = inputValue.value.toDoubleOrNull()
+            input?.let {
+                var result = (it * conversionRate[toUnit.value]!! / conversionRate[fromUnit.value]!!)
+                outputValue.value = result.toString()
+            }
+        }) {
+            Text(text = "Convert")
+        }
+
+        Spacer(modifier = Modifier.width(16.dp))
+
+        //output text
+        Text(
+            text = outputValue.value,
+            style = MaterialTheme.typography.headlineMedium,
+            modifier = Modifier.align(Alignment.CenterHorizontally)
+        )
+
     }
 }
