@@ -6,15 +6,15 @@ plugins {
 android {
     namespace = "com.example.jetpack2_unitconverter"
     compileSdk {
-        version = release(36) {
+        version = release(37) {
             minorApiLevel = 1
         }
     }
 
     defaultConfig {
         applicationId = "com.example.jetpack2_unitconverter"
-        minSdk = 29
-        targetSdk = 36
+        minSdk = 31
+        targetSdk = 33
         versionCode = 1
         versionName = "1.0"
 

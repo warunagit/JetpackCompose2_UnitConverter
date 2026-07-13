@@ -22,11 +22,14 @@ class MainActivity : ComponentActivity() {
             Jetpack2_unitconverterTheme {
                 Scaffold(
                     modifier = Modifier.fillMaxSize()
-                ) {
-                    Box(){
-
+                ) {innerPadding ->
+                    Box(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(innerPadding)
+                    ){
+                        UnitApp()
                     }
-
                 }
             }
         }
