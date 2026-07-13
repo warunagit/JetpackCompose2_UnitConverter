@@ -18,6 +18,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Shapes
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -63,6 +64,7 @@ fun UnitApp(modifier: Modifier = Modifier){
 
     //Generate ui
     Column(
+        //column-turn all elements in to columns
         modifier = Modifier
             .fillMaxSize()
             .background(Color.Yellow.copy(alpha = .6f))
@@ -129,32 +131,30 @@ fun UnitApp(modifier: Modifier = Modifier){
                         )
                     }
                 }
-                //3rd ui element..
-                Spacer(modifier = Modifier.width(16.dp))
             }
+            //2nd element: spacer
+            Spacer(modifier = Modifier.width(16.dp))
 
-            //2nd element wrapper
+            //3rd element wrapper
             Box(
                 modifier = Modifier
                     .weight(1f)
                     .height(56.dp)
                     .clickable{
-                        expandFrom.value = true
+                        expandTo.value = true
                     }.border(
                         width = 2.dp,
                         color = Color.Black,
                         shape = MaterialTheme.shapes.medium
-                    ).padding(start = 10.dp)
+                    )
             ){
-                //1st ui element
                 Text(
-                    text = fromUnit.value,
+                    text = toUnit.value,
                     modifier = Modifier.align(Alignment.Center)
                 )
-                //2nd ui element
                 DropdownMenu(
-                    expandFrom.value,
-                    onDismissRequest = {expandFrom.value = false}
+                    expandTo.value,
+                    onDismissRequest = {expandTo.value = false}
                 ) {
 
                     conversionRate.keys.forEach {
@@ -162,14 +162,26 @@ fun UnitApp(modifier: Modifier = Modifier){
                             text = {Text(text = it)},
                             onClick = {
                                 fromUnit.value = it
-                                expandFrom.value = false
+                                expandTo.value = false
                             }
                         )
                     }
                 }
-                //3rd ui element..
-                Spacer(modifier = Modifier.width(16.dp))
             }
         }
+
+        Spacer(modifier = Modifier.width(16.dp))
+
+        OutlinedTextField(
+            value = inputValue.value,
+            onValueChange = {
+                inputValue.value = it
+            },
+            label = {
+                Text(text = "Enter value")
+            },
+            modifier = Modifier
+                .fillMaxWidth()
+        )
     }
 }
